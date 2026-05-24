@@ -1,5 +1,5 @@
 # Portfolio
-# Moomna Atiq Portfolio
+## Moomna Atiq Portfolio
 
 Welcome to my personal portfolio website.  
 This portfolio represents my academic journey, technical skills, and projects related to programming and web development.
