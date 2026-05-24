@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moomna Atiq — Frontend Developer | Distinct Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0c0b0a;
+  --paper: #f9f6f0;
+  --cream: #eee9df;
+  --warm: #e5dfd3;
+  --accent: #c0472a;
+  --accent2: #1b4da3;
+  --accent3: #277a4e;
+  --gold: #c89b2a;
+  --muted: #6e6459;
+  --border: #d5cfc3;
+  --white: #ffffff;
+  --shadow: rgba(10,10,10,0.09);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);overflow-x:hidden;line-height:1.6}
+
+/* ── CURSOR ── */
+*, *::before, *::after { cursor: default; }
+a, button, [onclick] { cursor: pointer; }
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:rgba(249,246,240,0.96);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 6vw;height:64px;
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 4px 30px rgba(10,10,10,0.08); }
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;
+  color:var(--ink);text-decoration:none;letter-spacing:0.02em;
+  display:flex;align-items:center;gap:2px;
+}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2.4rem;list-style:none}
+.nav-links a{
+  font-size:0.75rem;font-weight:500;text-decoration:none;color:var(--muted);
+  letter-spacing:0.12em;text-transform:uppercase;transition:color 0.2s;
+  position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;
+  background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 0.25s;
+}
+.nav-links a:hover{color:var(--accent)}
+.nav-links a:hover::after{transform:scaleX(1)}
+/* CV option completely removed */
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;
+  display:grid;grid-template-columns:1.15fr 0.85fr;
+  align-items:center;padding:100px 6vw 60px;
+  position:relative;overflow:hidden;
+}
+.hero-bg-grid{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:60px 60px;opacity:0.3;
+}
+.hero-bg-circle{
+  position:absolute;right:-10%;top:15%;width:600px;height:600px;
+  border-radius:50%;background:radial-gradient(circle,rgba(192,71,42,0.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-watermark{
+  position:absolute;bottom:-4%;left:-2%;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(100px,18vw,240px);font-weight:700;font-style:italic;
+  color:rgba(192,71,42,0.04);white-space:nowrap;
+  user-select:none;pointer-events:none;line-height:1;
+}
+.hero-left{position:relative;z-index:1}
+.hero-status{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(39,122,78,0.08);color:var(--accent3);
+  border:1px solid rgba(39,122,78,0.22);
+  font-size:0.71rem;font-weight:600;letter-spacing:0.11em;text-transform:uppercase;
+  padding:6px 16px 6px 12px;border-radius:30px;margin-bottom:2rem;
+  animation:fadeUp 0.6s ease both;
+}
+.status-dot{width:8px;height:8px;border-radius:50%;background:var(--accent3);animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.85)}}
+
+.hero-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.2rem,6vw,6rem);font-weight:700;line-height:0.97;
+  letter-spacing:-0.015em;
+  animation:fadeUp 0.7s ease both 0.1s;
+}
+.hero-name em{color:var(--accent);font-style:italic;display:block}
+.hero-title-line{
+  display:flex;align-items:center;gap:1rem;margin:1.4rem 0 1rem;
+  animation:fadeUp 0.7s ease both 0.17s;
+}
+.hero-title-line span{
+  font-family:'JetBrains Mono',monospace;font-size:0.78rem;
+  color:var(--accent);letter-spacing:0.05em;
+}
+.hero-title-line::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);max-width:200px}
+.hero-sub{
+  font-size:1.02rem;color:var(--muted);margin:0 0 2.4rem;
+  max-width:440px;line-height:1.8;
+  animation:fadeUp 0.7s ease both 0.22s;
+}
+.hero-ctas{
+  display:flex;gap:0.9rem;flex-wrap:wrap;
+  animation:fadeUp 0.7s ease both 0.28s;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 28px;font-size:0.85rem;font-weight:600;
+  text-decoration:none;border-radius:5px;transition:all 0.22s;
+  letter-spacing:0.03em;
+}
+.btn-primary{background:var(--ink);color:var(--paper)}
+.btn-primary:hover{background:var(--accent);transform:translateY(-2px);box-shadow:0 6px 20px rgba(192,71,42,0.3)}
+.btn-outline{border:1.5px solid var(--ink);color:var(--ink);background:transparent}
+.btn-outline:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
+
+/* ── HERO CARD ── */
+.hero-right{
+  display:flex;justify-content:center;align-items:center;
+  position:relative;z-index:1;
+  animation:fadeIn 1s ease both 0.4s;
+}
+.hero-card{
+  background:var(--white);border:1px solid var(--border);border-radius:16px;
+  padding:2.3rem;max-width:310px;width:100%;
+  box-shadow:14px 14px 0 var(--cream),26px 26px 0 var(--warm);
+  position:relative;
+}
+.hc-badge{
+  position:absolute;top:-12px;right:20px;
+  background:var(--accent);color:#fff;
+  font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:500;
+  padding:4px 12px;border-radius:20px;letter-spacing:0.08em;
+}
+.hc-avatar{
+  width:62px;height:62px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:1.55rem;font-weight:700;color:#fff;
+  margin-bottom:1rem;box-shadow:0 4px 16px rgba(192,71,42,0.25);
+}
+.hero-card h3{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-weight:700;margin-bottom:0.2rem}
+.hero-card .sub{font-size:0.77rem;color:var(--muted);margin-bottom:1.4rem}
+.hc-links{display:flex;flex-direction:column;gap:0.45rem}
+.hc-link{
+  display:flex;align-items:center;gap:10px;
+  font-size:0.77rem;color:var(--ink);text-decoration:none;
+  padding:8px 12px;border-radius:8px;border:1px solid var(--border);
+  transition:all 0.2s;background:var(--paper);
+}
+.hc-link:hover{border-color:var(--accent);color:var(--accent);background:rgba(192,71,42,0.04);transform:translateX(3px)}
+.hc-link svg{width:14px;height:14px;flex-shrink:0;color:var(--muted);transition:color 0.2s}
+.hc-link:hover svg{color:var(--accent)}
+
+/* ── SECTION BASE ── */
+section{padding:95px 6vw}
+.sec-hd{display:flex;align-items:center;gap:1rem;margin-bottom:3.8rem}
+.sec-num{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--accent);font-weight:500}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3.2vw,2.8rem);font-weight:700}
+.sec-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);max-width:220px}
+
+/* ── ABOUT ── */
+#about{background:var(--cream)}
+.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:4rem;align-items:start}
+.about-text p{font-size:1rem;line-height:1.88;color:#3a3530;margin-bottom:1.1rem}
+.about-text p strong{color:var(--accent)}
+.about-text p em{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05em;color:var(--ink)}
+.about-stats{display:flex;flex-direction:column;gap:1rem}
+.stat-box{
+  background:var(--white);border:1px solid var(--border);border-radius:12px;
+  padding:1.4rem 1.6rem;border-left:3px solid var(--accent);
+  transition:all 0.2s;
+}
+.stat-box:hover{transform:translateX(4px);border-color:var(--accent);box-shadow:0 4px 16px var(--shadow)}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--accent);line-height:1}
+.stat-label{font-size:0.78rem;color:var(--muted);margin-top:0.3rem;font-weight:500}
+
+/* ── LANGUAGES ── */
+#languages{background:var(--paper)}
+.lang-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.3rem}
+.lang-card{
+  background:var(--white);border:1px solid var(--border);border-radius:12px;
+  padding:1.5rem 1.6rem;transition:all 0.25s;position:relative;overflow:hidden;
+}
+.lang-card::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--accent2);
+}
+.lang-card:hover{border-color:var(--accent2);transform:translateY(-4px);box-shadow:0 10px 28px var(--shadow)}
+.lang-icon{
+  width:36px;height:36px;border-radius:8px;
+  background:rgba(27,77,163,0.08);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;margin-bottom:0.9rem;
+}
+.lang-name{
+  font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;
+  margin-bottom:0.25rem;
+}
+.lang-level{
+  font-family:'JetBrains Mono',monospace;font-size:0.68rem;
+  color:var(--accent2);letter-spacing:0.07em;margin-bottom:0.8rem;
+  text-transform:uppercase;
+}
+
+
+/* ── SKILLS ── */
+#skills{background:var(--cream)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.3rem}
+.skill-card{
+  background:var(--white);border:1px solid var(--border);border-radius:12px;
+  padding:1.5rem 1.7rem;transition:all 0.25s;position:relative;overflow:hidden;
+}
+.skill-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  transform:scaleX(0);transform-origin:left;transition:transform 0.3s;
+}
+.skill-card:hover{border-color:transparent;transform:translateY(-3px);box-shadow:0 8px 24px var(--shadow)}
+.skill-card:hover::after{transform:scaleX(1)}
+.sk-cat{
+  font-size:0.68rem;text-transform:uppercase;letter-spacing:0.13em;
+  color:var(--muted);margin-bottom:0.8rem;font-weight:600;
+}
+.sk-tags{display:flex;flex-wrap:wrap;gap:0.45rem}
+.sk-tag{
+  font-family:'JetBrains Mono',monospace;font-size:0.72rem;
+  background:var(--cream);color:var(--ink);padding:4px 11px;border-radius:5px;
+  border:1px solid var(--border);transition:all 0.2s;
+}
+.sk-tag:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* EDUCATION SECTION FULLY REMOVED */
+
+/* ── PROJECTS (clean: no details toggle, only report link) ── */
+#projects{background:var(--ink);color:var(--paper);position:relative;overflow:hidden}
+.projects-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);
+  background-size:50px 50px;
+}
+#projects .sec-title{color:var(--paper)}
+#projects .sec-line{background:rgba(248,245,239,0.12)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.6rem;position:relative;z-index:1}
+.proj-card{
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.09);
+  border-radius:14px;padding:2rem;transition:all 0.3s;
+  position:relative;overflow:hidden;
+  cursor:default;
+}
+.proj-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),#e8815e);
+  transform:scaleX(0);transform-origin:left;transition:transform 0.35s;
+}
+.proj-card:hover{
+  border-color:rgba(192,71,42,0.35);
+  background:rgba(192,71,42,0.05);
+  transform:translateY(-5px);
+  box-shadow:0 16px 40px rgba(0,0,0,0.3);
+}
+.proj-card:hover::before{transform:scaleX(1)}
+.proj-num{font-family:'JetBrains Mono',monospace;font-size:0.67rem;color:var(--accent);margin-bottom:0.9rem;display:block}
+.proj-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;color:var(--paper);margin-bottom:0.45rem;line-height:1.25}
+.proj-course{font-size:0.72rem;color:rgba(248,245,239,0.38);margin-bottom:1rem}
+.proj-desc{font-size:0.86rem;color:rgba(248,245,239,0.65);line-height:1.7;margin-bottom:1.2rem}
+.proj-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.5rem}
+.proj-tag{
+  font-family:'JetBrains Mono',monospace;font-size:0.67rem;
+  background:rgba(192,71,42,0.12);color:#e8815e;
+  padding:3px 10px;border-radius:4px;border:1px solid rgba(192,71,42,0.25);
+}
+/* Report link - opens in new tab */
+.report-link{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 20px;background:var(--accent);color:#fff;
+  font-size:0.79rem;font-weight:600;text-decoration:none;border-radius:7px;
+  transition:all 0.2s;border:none;cursor:pointer;
+  margin-top:0.2rem;
+}
+.report-link:hover{background:#a33920;transform:translateY(-2px);box-shadow:0 4px 16px rgba(192,71,42,0.4)}
+.back-note{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:9px 18px;background:rgba(255,255,255,0.06);color:rgba(248,245,239,0.5);
+  font-size:0.77rem;border-radius:7px;border:1px solid rgba(255,255,255,0.1);
+  margin-left:0.5rem;
+}
+.proj-actions{display:flex;flex-wrap:wrap;align-items:center;gap:0.8rem;margin-top:0.2rem;}
+
+/* ── CONTACT ── */
+#contact{text-align:center;padding:95px 6vw 115px;background:var(--cream);position:relative;overflow:hidden}
+#contact::before{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(192,71,42,0.05),transparent 70%);
+  pointer-events:none;
+}
+.contact-headline{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.5rem,5vw,4.5rem);font-weight:700;line-height:1.05;margin-bottom:1.1rem;
+  position:relative;z-index:1;
+}
+.contact-headline em{color:var(--accent);font-style:italic}
+.contact-sub{font-size:1rem;color:var(--muted);max-width:400px;margin:0 auto 3rem;line-height:1.8;position:relative;z-index:1}
+.contact-links{display:flex;justify-content:center;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
+.contact-link{
+  display:flex;align-items:center;gap:11px;
+  padding:15px 26px;border:1.5px solid var(--border);border-radius:10px;
+  text-decoration:none;color:var(--ink);font-weight:500;font-size:0.87rem;
+  background:var(--white);transition:all 0.22s;
+}
+.contact-link:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 24px var(--shadow)}
+.contact-link svg{width:16px;height:16px;color:var(--muted);transition:color 0.2s}
+.contact-link:hover svg{color:var(--accent)}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);color:rgba(248,245,239,0.3);text-align:center;padding:1.8rem;font-size:0.78rem}
+footer strong{color:var(--accent)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr}
+  .about-stats{flex-direction:row;flex-wrap:wrap}
+  .stat-box{flex:1;min-width:120px}
+}
+@media(max-width:768px){
+  #hero{grid-template-columns:1fr;padding-top:88px}
+  .hero-right{display:none}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV (CV option completely removed) -->
+<nav id="mainNav">
+  <a href="#hero" class="nav-logo">Moomna<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#languages">Languages</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-bg-circle"></div>
+  <div class="hero-watermark">MOOMNA</div>
+
+  <div class="hero-left">
+    <div class="hero-status">
+      <span class="status-dot"></span>
+      Available for Opportunities
+    </div>
+    <h1 class="hero-name">Moomna<em>Atiq</em></h1>
+    <div class="hero-title-line">
+      <span>Frontend Developer &amp; CS Student</span>
+    </div>
+    <p class="hero-sub">BCS student at Fatima Jinnah Women University. Building clean, user-centered web experiences with HTML, CSS, JavaScript &amp; PHP.</p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-primary">View Projects →</a>
+      <a href="#contact" class="btn btn-outline">Contact Me</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="hc-badge">BCS · 6th Sem</div>
+      <div class="hc-avatar">MA</div>
+      <h3>Moomna Atiq</h3>
+      <p class="sub">Frontend Developer · FJWU Rawalpindi</p>
+      <div class="hc-links">
+        <a href="tel:03129483474" class="hc-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.7A2 2 0 012 1.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.07a16 16 0 006.84 6.84l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          03129483474
+        </a>
+        <a href="mailto:moomna945@gmail.com" class="hc-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          moomna945@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/moomna-atiq-6870bb388" target="_blank" class="hc-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn Profile
+        </a>
+        <a href="https://github.com/Moomnaatiq808" target="_blank" class="hc-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          GitHub: Moomnaatiq808
+        </a>
+        <a href="#" class="hc-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Bagh, AJK
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-hd">
+    <span class="sec-num">01 /</span>
+    <h2 class="sec-title">About Me</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a <strong>motivated and enthusiastic Computer Science student</strong> currently in my 6th semester at Fatima Jinnah Women University, Rawalpindi. My passion lies in frontend development and creating clean, accessible digital experiences that people actually enjoy using.</p>
+      <p>I have hands-on experience with <strong>HTML, CSS, JavaScript</strong>, and backend development using <strong>PHP &amp; MySQL</strong>. I've contributed to multiple team projects spanning web engineering, AI systems, data structures, and digital logic design.</p>
+      <p>Beyond coding, I enjoy <em>Canva designing</em> — creating posters, resumes, and presentations that communicate ideas visually. I'm a quick learner with strong communication and problem-solving abilities, always eager to tackle new challenges.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-box">
+        <div class="stat-num">6</div>
+        <div class="stat-label">University Projects</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Languages & Technologies</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">3rd</div>
+        <div class="stat-label">Year, BCS @ FJWU</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section id="languages">
+  <div class="sec-hd">
+    <span class="sec-num">02 /</span>
+    <h2 class="sec-title">Programming Languages</h2>
+    <div class="sec-line"></div>
+  </div>
+  <div class="lang-grid">
+    <div class="lang-card"><div class="lang-icon">🌐</div><div class="lang-name">HTML5</div><div class="lang-level">Markup Language</div></div>
+    <div class="lang-card"><div class="lang-icon">🎨</div><div class="lang-name">CSS3</div><div class="lang-level">Stylesheet Language</div></div>
+    <div class="lang-card"><div class="lang-icon">⚡</div><div class="lang-name">JavaScript</div><div class="lang-level">Programming Language</div></div>
+    <div class="lang-card"><div class="lang-icon">🐘</div><div class="lang-name">PHP</div><div class="lang-level">Backend Language</div></div>
+    <div class="lang-card"><div class="lang-icon">⚙️</div><div class="lang-name">C / C++</div><div class="lang-level">Programming Language</div></div>
+    <div class="lang-card"><div class="lang-icon">☕</div><div class="lang-name">Java</div><div class="lang-level">OOP Language</div></div>
+    <div class="lang-card"><div class="lang-icon">🐍</div><div class="lang-name">Python</div><div class="lang-level">Programming Language</div></div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sec-hd"><span class="sec-num">03 /</span><h2 class="sec-title">Technical Skills</h2><div class="sec-line"></div></div>
+  <div class="skills-grid">
+    <div class="skill-card"><div class="sk-cat">Web Development</div><div class="sk-tags"><span class="sk-tag">HTML5</span><span class="sk-tag">CSS3</span><span class="sk-tag">JavaScript</span><span class="sk-tag">PHP</span><span class="sk-tag">Responsive Design</span></div></div>
+    <div class="skill-card"><div class="sk-cat">Database &amp; Backend</div><div class="sk-tags"><span class="sk-tag">MySQL</span><span class="sk-tag">XAMPP</span><span class="sk-tag">SQL</span></div></div>
+    <div class="skill-card"><div class="sk-cat">Tools &amp; Design</div><div class="sk-tags"><span class="sk-tag">Canva</span><span class="sk-tag">Arduino</span><span class="sk-tag">VS Code</span><span class="sk-tag">XAMPP</span></div></div>
+    <div class="skill-card"><div class="sk-cat">CS Concepts</div><div class="sk-tags"><span class="sk-tag">OOP</span><span class="sk-tag">DSA</span><span class="sk-tag">AI Basics</span><span class="sk-tag">Digital Logic</span></div></div>
+    <div class="skill-card"><div class="sk-cat">Soft Skills</div><div class="sk-tags"><span class="sk-tag">Communication</span><span class="sk-tag">Teamwork</span><span class="sk-tag">Creativity</span><span class="sk-tag">Time Mgmt</span><span class="sk-tag">Problem Solving</span></div></div>
+  </div>
+</section>
+
+<!-- PROJECTS SECTION: no details toggle, only report link opens in new tab. Education section removed -->
+<section id="projects">
+  <div class="projects-bg"></div>
+  <div class="sec-hd" style="position:relative;z-index:1"><span class="sec-num">04 /</span><h2 class="sec-title">Projects</h2><div class="sec-line"></div></div>
+  <div class="projects-grid">
+    <!-- 1st Semester -->
+    <div class="proj-card">
+      <span class="proj-num">01 · Programming Fundamentals · 1st Semester</span>
+      <div class="proj-title">Tic Tac Toe Game (C)</div>
+      <div class="proj-course">PF Lab Project</div>
+      <p class="proj-desc">A two-player console Tic Tac Toe game in C featuring win detection for all rows, columns, and diagonals, plus draw condition handling.</p>
+      <div class="proj-tags"><span class="proj-tag">C Language</span><span class="proj-tag">Arrays</span><span class="proj-tag">Logic</span><span class="proj-tag">Console UI</span></div>
+      <div class="proj-actions"><a href="https://drive.google.com/file/d/1guXfbde3hOuqhUwG_x3BpQ7wdYSs_1jI/view?usp=sharing" target="_blank" class="report-link">📄 Open Full Report</a><span class="back-note">opens in new tab</span></div>
+    </div>
+    <!-- 2nd Semester -->
+    <div class="proj-card">
+      <span class="proj-num">02 · OOP Lab · 2nd Semester</span>
+      <div class="proj-title">Social Media Platform Management System</div>
+      <div class="proj-course">Submitted to: Sir Adeel Khalid</div>
+      <p class="proj-desc">A Java-based social media application enabling user registration, posting, commenting, liking, sharing, following, and direct messaging with full database integration.</p>
+      <div class="proj-tags"><span class="proj-tag">Java</span><span class="proj-tag">OOP</span><span class="proj-tag">MySQL</span><span class="proj-tag">JDBC</span></div>
+      <div class="proj-actions"><a href="https://drive.google.com/file/d/1H7rG80f9doAoKxS0fi1ZcpvQQ6TNaV4o/view?usp=sharing" target="_blank" class="report-link">📄 Open Full Report</a><span class="back-note">opens in new tab</span></div>
+    </div>
+    <!-- 3rd Semester AI -->
+    <div class="proj-card">
+      <span class="proj-num">03 · AI · 3rd Semester</span>
+      <div class="proj-title">Airline Reservation System (AI Integration)</div>
+      <div class="proj-course">Submitted to: Mam Quratulain Majid</div>
+      <p class="proj-desc">A Python-based airline reservation system using linked lists, with an AI enhancement proposal covering NLP chatbots, dynamic pricing, and ML-based demand forecasting.</p>
+      <div class="proj-tags"><span class="proj-tag">Python</span><span class="proj-tag">Linked List</span><span class="proj-tag">AI Concepts</span><span class="proj-tag">NLP</span></div>
+      <div class="proj-actions"><a href="https://drive.google.com/file/d/1azUtsS0fCvhUy24PbtFeIFHglVPSLpIu/view?usp=sharing" target="_blank" class="report-link">📄 Open Full Report</a><span class="back-note">opens in new tab</span></div>
+    </div>
+    <!-- 3rd Semester DSA -->
+    <div class="proj-card">
+      <span class="proj-num">04 · DSA · 3rd Semester</span>
+      <div class="proj-title">Airline Reservation System (C++ / DSA)</div>
+      <div class="proj-course">Submitted to: Sir Adeel Khalid</div>
+      <p class="proj-desc">A C++ implementation using linked lists and arrays, demonstrating core data structure concepts including traversal, insertion, and deletion with a menu-driven interface.</p>
+      <div class="proj-tags"><span class="proj-tag">C++</span><span class="proj-tag">Linked List</span><span class="proj-tag">Data Structures</span><span class="proj-tag">Algorithms</span></div>
+      <div class="proj-actions"><a href="https://drive.google.com/file/d/1azUtsS0fCvhUy24PbtFeIFHglVPSLpIu/view?usp=sharing" target="_blank" class="report-link">📄 Open Full Report</a><span class="back-note">opens in new tab</span></div>
+    </div>
+    <!-- Digital Logic Design -->
+    <div class="proj-card">
+      <span class="proj-num">05 · Digital Logic Design · 4th Semester</span>
+      <div class="proj-title">Water Level Indicator (Arduino)</div>
+      <div class="proj-course">Submitted to: Sir Majid Shafique</div>
+      <p class="proj-desc">An Arduino-based water level monitoring circuit with capacitive sensor and tri-color LED indicators for low, mid, and high water level thresholds.</p>
+      <div class="proj-tags"><span class="proj-tag">Arduino</span><span class="proj-tag">C (Embedded)</span><span class="proj-tag">Electronics</span><span class="proj-tag">Digital Logic</span></div>
+      <div class="proj-actions"><a href="https://drive.google.com/file/d/1k2Aq-tLZ8zp7YfuAzMyqhT8e5y5pf145/view?usp=sharing" target="_blank" class="report-link">📄 Open Full Report</a><span class="back-note">opens in new tab</span></div>
+    </div>
+    <!-- 5th Semester Web Engineering -->
+    <div class="proj-card">
+      <span class="proj-num">06 · Web Engineering · 5th Semester</span>
+      <div class="proj-title">Department of Gender Studies Web Portal</div>
+      <div class="proj-course">Submitted to: Maam Qurat ul Ain</div>
+      <p class="proj-desc">A role-based web application for the Gender Studies Department with separate admin and student dashboards for managing courses, events, and academic resources.</p>
+      <div class="proj-tags"><span class="proj-tag">HTML</span><span class="proj-tag">CSS</span><span class="proj-tag">JavaScript</span><span class="proj-tag">PHP</span><span class="proj-tag">MySQL</span><span class="proj-tag">XAMPP</span></div>
+      <div class="proj-actions"><a href="https://drive.google.com/file/d/1Rh65Jl_nWTwenzL2FkPsXGjnz5jKdOjg/view?usp=sharing" target="_blank" class="report-link">📄 Open Full Report</a><span class="back-note">opens in new tab</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-hd" style="justify-content:center;margin-bottom:1.4rem"><span class="sec-num">05 /</span><h2 class="sec-title">Contact</h2></div>
+  <h2 class="contact-headline">Let's work<br><em>together</em></h2>
+  <p class="contact-sub">Open to internships, freelance projects, and collaborative opportunities. Let's build something great!</p>
+  <div class="contact-links">
+    <a href="mailto:moomna945@gmail.com" class="contact-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>moomna945@gmail.com</a>
+    <a href="tel:03129483474" class="contact-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.7A2 2 0 012 1.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 9.07a16 16 0 006.84 6.84l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>03129483474</a>
+    <a href="https://www.linkedin.com/in/moomna-atiq-6870bb388" target="_blank" class="contact-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a>
+    <a href="https://github.com/Moomnaatiq808" target="_blank" class="contact-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>GitHub</a>
+  </div>
+</section>
+
+<footer>Designed &amp; built by <strong>Moomna Atiq</strong> — Frontend Developer · BCS @ FJWU · 2025</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 30);
+});
+const fadeObs = new IntersectionObserver((entries) => {
+  entries.forEach(en => {
+    if(en.isIntersecting){
+      en.target.style.opacity = '1';
+      en.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.proj-card, .skill-card, .lang-card, .stat-box').forEach((el, i) => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(24px)';
+  el.style.transition = `opacity 0.55s ease ${(i % 4) * 0.07}s, transform 0.55s ease ${(i % 4) * 0.07}s`;
+  fadeObs.observe(el);
+});
+</script>
+</body>
+</html>
